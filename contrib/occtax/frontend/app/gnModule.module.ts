@@ -35,6 +35,7 @@ import { OcctaxFormMapService } from "./occtax-form/map/occtax-map.service";
 import { OcctaxFormParamService } from "./occtax-form/form-param/form-param.service";
 
 import { MatSlideToggleModule } from "@angular/material/slide-toggle";
+import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatTabsModule } from "@angular/material/tabs";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { MatTableModule } from "@angular/material/table";
@@ -94,6 +95,7 @@ export function createTranslateLoader(http: HttpClient, config: ConfigService) {
     }),
     CommonModule,
     MatSlideToggleModule,
+    MatButtonToggleModule,
     MatTabsModule,
     FormsModule,
     ReactiveFormsModule,
