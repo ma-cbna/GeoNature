@@ -54,7 +54,6 @@ export class OcctaxMapInfoComponent implements OnInit, AfterViewInit {
   public occurrenceAddFields: Array<any> = [];
   public countingAddFields: Array<any> = [];
 
-
   get releve() {
     return this.occtaxData.getValue() ? this.occtaxData.getValue().properties : null;
   }
@@ -170,7 +169,7 @@ export class OcctaxMapInfoComponent implements OnInit, AfterViewInit {
               additionalFields.forEach((field) => {
                 const map = {
                   OCCTAX_RELEVE: this.releveAddFields,
-                  OCCTAX_OCCURENCE: this.occurrenceAddFields,
+                  OCCTAX_OCCURRENCE: this.occurrenceAddFields,
                   OCCTAX_DENOMBREMENT: this.countingAddFields,
                 };
                 if (field.type_widget != 'html') {
@@ -191,7 +190,7 @@ export class OcctaxMapInfoComponent implements OnInit, AfterViewInit {
               additionalFields.forEach((field) => {
                 const map = {
                   OCCTAX_RELEVE: this.releveAddFields,
-                  OCCTAX_OCCURENCE: this.occurrenceAddFields,
+                  OCCTAX_OCCURRENCE: this.occurrenceAddFields,
                   OCCTAX_DENOMBREMENT: this.countingAddFields,
                 };
                 field.objects.forEach((object) => {
@@ -275,7 +274,6 @@ export class OcctaxMapInfoComponent implements OnInit, AfterViewInit {
       this.translate
     );
   }
-
 
   isActionAllowed(action: 'U' | 'D'): boolean {
     return this.actionService.isActionAllowed(this.userReleveCruved, this.afOpened, action);

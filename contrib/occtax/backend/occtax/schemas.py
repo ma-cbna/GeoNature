@@ -21,6 +21,7 @@ from geonature.core.gn_meta.schemas import DatasetSchema
 from geonature.core.gn_commons.schemas import MediaSchema
 from geonature.core.taxonomie.schemas import TaxrefSchema
 from geonature.core.gn_monitoring.schema import TIndividualsSchema
+from geonature.core.schemas import AdditionalDataWithNomenclatureField
 from geonature.utils.config import config
 from pypnusershub.db.models import User
 from pypn_habref_api.schemas import HabrefSchema
@@ -73,10 +74,15 @@ class ObserverSchema(MA.SQLAlchemyAutoSchema):
 
 
 class CountingSchema(MA.SQLAlchemyAutoSchema):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.module_code = g.current_module.module_code
+
     class Meta:
         model = CorCountingOccurrence
         load_instance = True
 
+    additional_fields = AdditionalDataWithNomenclatureField(object_code="OCCTAX_DENOMBREMENT")
     medias = MA.Nested(MediaSchema, many=True)
     id_individual = MA.auto_field()
     individual = MA.Nested(TIndividualsSchema, dump_only=True)
@@ -89,11 +95,16 @@ class CountingSchema(MA.SQLAlchemyAutoSchema):
 
 
 class OccurrenceSchema(MA.SQLAlchemyAutoSchema):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.module_code = g.current_module.module_code
+
     class Meta:
         model = TOccurrencesOccurrence
         load_instance = True
         include_fk = True
 
+    additional_fields = AdditionalDataWithNomenclatureField(object_code="OCCTAX_OCCURRENCE")
     cor_counting_occtax = MA.Nested(CountingSchema, many=True)
     taxref = MA.Nested(TaxrefSchema, dump_only=True)
 
@@ -108,6 +119,10 @@ class VegetationStratumSchema(MA.SQLAlchemyAutoSchema):
 
 
 class ReleveSchema(MA.SQLAlchemyAutoSchema):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.module_code = g.current_module.module_code
+
     class Meta:
         model = TRelevesOccurrence
         load_instance = True
@@ -127,6 +142,7 @@ class ReleveSchema(MA.SQLAlchemyAutoSchema):
     digitiser = MA.Nested(ObserverSchema, dump_only=True)
     dataset = MA.Nested(DatasetSchema, dump_only=True)
     habitat = MA.Nested(HabrefSchema, dump_only=True)
+    additional_fields = AdditionalDataWithNomenclatureField(object_code="OCCTAX_RELEVE")
 
     t_vegetation_stratum = fields.Nested(VegetationStratumSchema, many=True)
     # __init__ is overridden because g.module_conf is only available during
@@ -155,7 +171,7 @@ class GeojsonReleveSchema(MA.Schema):
     # load_instance = True
 
     id = fields.Integer()
-    properties = fields.Nested(ReleveSchema(exclude=("geom_4326",)))
+    properties = fields.Nested(ReleveSchema, exclude=("geom_4326",))
     geometry = GeojsonSerializationField()
     af_opened = fields.Boolean()
 
