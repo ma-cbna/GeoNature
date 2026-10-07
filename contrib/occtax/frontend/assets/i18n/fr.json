@@ -101,7 +101,7 @@
       "OccSupport": "Support"
     },
     "TaxaList": {
-      "SortByRecord": "Ordre d'ajout",
+      "SortByRecord": "Ordre de saisie",
       "SortByName": "Ordre alphabétique",
       "SortAsc": "Ordre croissant",
       "SortDesc": "Ordre décroissant"
