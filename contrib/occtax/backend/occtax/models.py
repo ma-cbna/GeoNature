@@ -1,7 +1,7 @@
 from typing import Any, Optional
 
 from geoalchemy2 import Geometry
-from sqlalchemy import Column, DateTime, FetchedValue, ForeignKey, Integer, Unicode, Numeric, Decimal, not_
+from sqlalchemy import Column, DateTime, FetchedValue, ForeignKey, Integer, Unicode, String, Numeric, Numeric, Decimal, not_
 from sqlalchemy.sql import select, func, and_
 from sqlalchemy.orm import relationship, backref, Mapped, mapped_column
 from sqlalchemy.dialects.postgresql import UUID, JSONB
