@@ -1,7 +1,7 @@
 from typing import Any, Optional
 
 from geoalchemy2 import Geometry
-from sqlalchemy import Column, DateTime, FetchedValue, ForeignKey, Integer, Unicode, String, Numeric, Numeric, Decimal, not_
+from sqlalchemy import Column, DateTime, FetchedValue, ForeignKey, Integer, Unicode, String, Numeric, Numeric, not_
 from sqlalchemy.sql import select, func, and_
 from sqlalchemy.orm import relationship, backref, Mapped, mapped_column
 from sqlalchemy.dialects.postgresql import UUID, JSONB
@@ -199,9 +199,9 @@ class TRelevesOccurrence(DB.Model):
     geom_local: Mapped[Optional[Any]] = mapped_column(Geometry("GEOMETRY"))
     cd_hab: Mapped[Optional[int]] = mapped_column(Integer, ForeignKey(Habref.cd_hab))
     precision: Mapped[Optional[int]]
-    code_releve: Mapped[Optional[str]] = mapped_column(Unicode(50), nullable=True)
-    slope: Mapped[Optional[Decimal]] = mapped_column(Numeric(4, 2))
-    area: Mapped[Optional[Decimal]] = mapped_column(Numeric(20, 2))
+    code_releve: Mapped[Optional[str]] = mapped_column(String(50), nullable=True)
+    slope: Mapped[Optional[Numeric]] = mapped_column(Numeric(4, 2))
+    area: Mapped[Optional[Numeric]] = mapped_column(Numeric(20, 2))
     id_nomenclature_exposure: Mapped[Optional[int]] = mapped_column(Integer)
     id_nomenclature_location_type: Mapped[Optional[int]] = mapped_column(
         Integer, ForeignKey("ref_geo.bib_areas_types.id_type")
